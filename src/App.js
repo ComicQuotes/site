@@ -118,7 +118,7 @@ export default function Album() {
         <main>
           {/* Hero unit */}
           <div className={classes.heroContent}>
-            <Container maxWidth="sm">
+            <Container style={{ width: "85vw" }}>
               <Typography
                 component="h1"
                 variant="h2"
@@ -126,7 +126,7 @@ export default function Album() {
                 color="textPrimary"
                 gutterBottom
               >
-                Album layout
+                Comic Quotes
               </Typography>
               <Typography
                 variant="h5"
@@ -156,19 +156,19 @@ export default function Album() {
                 <Grid container spacing={2} justify="center">
                   <Grid item>
                     <Button variant="contained" color="primary">
-                      Main call to action
+                      Use it in your own app
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button variant="outlined" color="primary">
-                      Secondary action
+                      API Documentation
                     </Button>
                   </Grid>
                 </Grid>
               </div>
             </Container>
           </div>
-          <Container className={classes.cardGrid} maxWidth="lg">
+          <Container className={classes.cardGrid} style={{ width: "85vw" }}>
             {/* End hero unit */}
             <Grid container spacing={4}>
               {cards.map((card) => (
