@@ -11,6 +11,10 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import FormControl from "@material-ui/core/FormControl";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputLabel from "@material-ui/core/InputLabel";
 import red from "@material-ui/core/colors/red";
 import grey from "@material-ui/core/colors/grey";
 import {
@@ -134,6 +138,20 @@ export default function Album() {
                 contents, the creator, etc. Make it short and sweet, but not too
                 short so folks don&apos;t simply skip over it entirely.
               </Typography>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-amount">
+                  Search Quote
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-amount"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <FormatQuoteIcon className={classes.icon} />
+                    </InputAdornment>
+                  }
+                  labelWidth={95}
+                />
+              </FormControl>
               <div className={classes.heroButtons}>
                 <Grid container spacing={2} justify="center">
                   <Grid item>
