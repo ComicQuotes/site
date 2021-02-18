@@ -1,6 +1,10 @@
 const Theme = (theme) => ({
   root: {
     fontFamily: "Segoe UI",
+    flexGrow: 1,
+  },
+  title: {
+    flexGrow: 1,
   },
   icon: {
     marginRight: theme.spacing(2),
@@ -30,6 +34,15 @@ const Theme = (theme) => ({
   footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
+  },
+  toolbar: {
+    flexWrap: "wrap",
+  },
+  toolbarTitle: {
+    flexGrow: 1,
+  },
+  link: {
+    margin: theme.spacing(1, 1.5),
   },
 });
 

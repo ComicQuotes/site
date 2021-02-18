@@ -18,23 +18,15 @@ import {
   ThemeProvider,
 } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
 import Theme from "./helpers/theme";
 
 import MyCard from "./components/Card";
+import Copyright from "./components/Copyright";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://github.com/NakshatraCodes">
-        Nakshatra Saxena
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+const handleInput = (e) => {
+  e.preventDefault();
+  console.log(e.target.value);
+};
 
 const theme = createMuiTheme({
   palette: {
@@ -73,14 +65,24 @@ export default function Album() {
     <React.Fragment>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <AppBar position="relative">
-          <Toolbar>
-            <FormatQuoteIcon className={classes.icon} />
-            <Typography variant="h6" color="inherit" noWrap>
-              Comic Quotes
-            </Typography>
-          </Toolbar>
-        </AppBar>
+        <div className={classes.root}>
+          <AppBar position="static">
+            <Toolbar>
+              <FormatQuoteIcon className={classes.icon} />
+              <Typography
+                variant="h6"
+                color="inherit"
+                className={classes.title}
+              >
+                Comic Quotes
+              </Typography>
+              <Button color="inherit">API</Button>
+              <Button color="inherit">Features</Button>
+              <Button color="inherit">Donate</Button>
+              <Button color="inherit">Github</Button>
+            </Toolbar>
+          </AppBar>
+        </div>
         <main>
           {/* Hero unit */}
           <div className={classes.heroContent}>
@@ -94,14 +96,14 @@ export default function Album() {
               >
                 Comic Quotes
               </Typography>
-              <Typography
+              {/* <Typography
                 variant="h5"
                 align="center"
                 color="textSecondary"
                 paragraph
               >
                 Search quotes from your favorite comics
-              </Typography>
+              </Typography> */}
               <FormControl fullWidth variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-amount">
                   Search Quote
@@ -113,6 +115,7 @@ export default function Album() {
                       <FormatQuoteIcon className={classes.icon} />
                     </InputAdornment>
                   }
+                  onChange={handleInput}
                   labelWidth={95}
                 />
               </FormControl>
