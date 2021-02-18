@@ -18,7 +18,7 @@ const handleInput = (e) => {
   console.log(e.target.value);
 };
 
-const Hero = () => {
+const Hero = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.heroContent}>
