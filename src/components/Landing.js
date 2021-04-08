@@ -9,6 +9,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import Cards from "./Cards";
 
@@ -23,6 +24,7 @@ export default function MyCard(props) {
   const [quotes, setQuotes] = useState([]);
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showLoader, setShowLoader] = useState(true);
   const classes = useStyles();
 
   useEffect(() => {
@@ -30,6 +32,7 @@ export default function MyCard(props) {
       const response = await quote.get(`/api/${keys.API_KEY}/quote?num=30`);
       setData(response.data);
       setQuotes(response.data);
+      setShowLoader(false);
     })();
   }, []);
 
@@ -94,7 +97,18 @@ export default function MyCard(props) {
         style={{ width: "85vw", minHeight: "50vh" }}
       >
         <Grid container spacing={4}>
-          <Cards quotes={quotes} />
+          {(() => {
+            if (showLoader) {
+              return (
+                <CircularProgress
+                  color="secondary"
+                  style={{ marginLeft: "calc(50% - 10px)" }}
+                />
+              );
+            } else {
+              return <Cards quotes={quotes} />;
+            }
+          })()}
         </Grid>
       </Container>
     </main>

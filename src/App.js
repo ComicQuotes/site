@@ -1,48 +1,17 @@
 import React from "react";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import red from "@material-ui/core/colors/red";
-import grey from "@material-ui/core/colors/grey";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import MyCard from "./components/Landing";
-import Footer from "./components/Footer";
-import Nav from "./components/Nav";
+import App from "./components/App";
+import Register from "./components/Register";
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: red[700],
-    },
-    text: {
-      primary: grey[800],
-      secondary: grey[500],
-    },
-    secondary: {
-      main: red[500],
-    },
-  },
-  typography: {
-    fontFamily: [
-      "-apple-system",
-      '"Segoe UI"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
-  },
-});
-
-export default function Album() {
+export default function All() {
   return (
-    <React.Fragment>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Nav />
-        <MyCard></MyCard>
-        <Footer />
-      </ThemeProvider>
-    </React.Fragment>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={App} />
+        {/* <Route exact path="/api-docs" component={Docs} /> */}
+        <Route exact path="/register" component={Register} />
+      </Switch>
+    </Router>
   );
 }
