@@ -4,7 +4,7 @@ import red from "@material-ui/core/colors/red";
 import grey from "@material-ui/core/colors/grey";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
-import MyCard from "./components/Card";
+import MyCard from "./components/Landing";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 
