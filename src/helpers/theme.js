@@ -51,7 +51,7 @@ const Theme = (theme) => ({
     alignItems: "center",
   },
   form: {
-    width: "50%", // Fix IE 11 issue.
+    // width: "50%",
     marginTop: theme.spacing(1),
   },
   submit: {

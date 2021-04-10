@@ -5,10 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -23,13 +20,17 @@ const useStyles = makeStyles(Theme);
 const theme = createMuiTheme(muiTheme);
 
 const Register = () => {
+  const handleRequest = (e) => {
+    e.preventDefault();
+  };
+
   const classes = useStyles();
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
         <CssBaseline>
           <Nav />
-          <Container style={{ width: "85vw", minHeight: "100vh" }}>
+          <Container style={{ maxWidth: "60vw", minHeight: "100vh" }}>
             <Typography
               component="h1"
               variant="h2"
@@ -47,9 +48,9 @@ const Register = () => {
               paragraph
               style={{ marginTop: "20px" }}
             >
-              Request an API Key
+              Register with your email address
             </Typography>
-            <Container style={{ maxWidth: "50vw" }}>
+            <Container>
               <form className={classes.form} noValidate>
                 <TextField
                   variant="outlined"
@@ -62,43 +63,22 @@ const Register = () => {
                   autoComplete="email"
                   autoFocus
                 />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
-                />
                 <Button
                   type="submit"
                   fullWidth
                   variant="contained"
                   color="primary"
                   className={classes.submit}
+                  onClick={handleRequest}
                 >
-                  Sign In
+                  Request API Key
                 </Button>
-                <Grid container>
-                  <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Forgot password?
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <Link href="#" variant="body2">
-                      {"Don't have an account? Sign Up"}
-                    </Link>
-                  </Grid>
-                </Grid>
               </form>
+
+              <Alert severity="success" variant="outlined">
+                <AlertTitle>Success</AlertTitle>
+                Your API key has been mailed to you, please check your mail
+              </Alert>
             </Container>
           </Container>
           <Footer />

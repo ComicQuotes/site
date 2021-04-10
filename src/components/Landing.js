@@ -10,6 +10,7 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { Link } from "react-router-dom";
 
 import Cards from "./Cards";
 
@@ -79,9 +80,11 @@ export default function MyCard(props) {
           <div className={classes.heroButtons}>
             <Grid container spacing={2} justify="center">
               <Grid item>
-                <Button variant="contained" color="primary">
-                  Use it in your own app
-                </Button>
+                <Link to="/register" style={{ textDecoration: "none" }}>
+                  <Button variant="contained" color="primary">
+                    Use it in your own app
+                  </Button>
+                </Link>
               </Grid>
               <Grid item>
                 <Button variant="outlined" color="primary">
