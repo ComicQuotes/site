@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -14,14 +14,23 @@ import Footer from "../partials/Footer";
 import muiTheme from "../helpers/muiTheme";
 
 import Theme from "../helpers/theme";
+import quote from "../api/quotes";
 
 const useStyles = makeStyles(Theme);
 
 const theme = createMuiTheme(muiTheme);
 
 const Register = () => {
-  const handleRequest = (e) => {
+  const [email, setEmail] = useState("");
+  const [alert, setAlert] = useState(false);
+  const [alertMsg, setAlertMsg] = useState("");
+
+  const handleRequest = async (e) => {
     e.preventDefault();
+    const { data } = await quote.post(`/register`, { email });
+    setAlertMsg(data.msg);
+    console.log(data);
+    setAlert(true);
   };
 
   const classes = useStyles();
@@ -62,6 +71,8 @@ const Register = () => {
                   name="email"
                   autoComplete="email"
                   autoFocus
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <Button
                   type="submit"
@@ -74,11 +85,14 @@ const Register = () => {
                   Request API Key
                 </Button>
               </form>
-
-              <Alert severity="success" variant="outlined">
-                <AlertTitle>Success</AlertTitle>
-                Your API key has been mailed to you, please check your mail
-              </Alert>
+              {alert ? (
+                <Alert severity="success" variant="outlined">
+                  <AlertTitle>Success</AlertTitle>
+                  {alertMsg}
+                </Alert>
+              ) : (
+                ""
+              )}
             </Container>
           </Container>
           <Footer />
