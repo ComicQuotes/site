@@ -4,7 +4,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import FormatQuoteIcon from "@material-ui/icons/FormatQuote";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-
+import { Link } from "react-router-dom";
 import Theme from "../helpers/theme";
 
 const useStyles = makeStyles(Theme);
@@ -17,7 +17,9 @@ const Nav = () => {
         <Toolbar>
           <FormatQuoteIcon className={classes.icon} />
           <Typography variant="h6" color="inherit" className={classes.title}>
-            Comic Quotes
+            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+              Comic Quotes
+            </Link>
           </Typography>
           <Button color="inherit">API</Button>
           <Button color="inherit">Features</Button>

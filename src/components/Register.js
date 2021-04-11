@@ -23,12 +23,12 @@ const theme = createMuiTheme(muiTheme);
 const Register = () => {
   const [email, setEmail] = useState("");
   const [alert, setAlert] = useState(false);
-  const [alertMsg, setAlertMsg] = useState("");
+  const [alertMsg, setAlertMsg] = useState({ status: "", msg: "" });
 
   const handleRequest = async (e) => {
     e.preventDefault();
     const { data } = await quote.post(`/register`, { email });
-    setAlertMsg(data.msg);
+    setAlertMsg({ status: data.status, msg: data.msg });
     console.log(data);
     setAlert(true);
   };
@@ -57,7 +57,8 @@ const Register = () => {
               paragraph
               style={{ marginTop: "20px" }}
             >
-              Register with your email address
+              You will need an API Key to use this service, please generate one
+              by registering with your email
             </Typography>
             <Container>
               <form className={classes.form} noValidate>
@@ -86,9 +87,11 @@ const Register = () => {
                 </Button>
               </form>
               {alert ? (
-                <Alert severity="success" variant="outlined">
-                  <AlertTitle>Success</AlertTitle>
-                  {alertMsg}
+                <Alert severity={alertMsg.status} variant="outlined">
+                  <AlertTitle>
+                    {alertMsg.status === "success" ? "Success" : "Error"}
+                  </AlertTitle>
+                  {alertMsg.msg}
                 </Alert>
               ) : (
                 ""

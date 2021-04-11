@@ -10,6 +10,7 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { Alert, AlertTitle } from "@material-ui/lab";
 import { Link } from "react-router-dom";
 
 import Cards from "./Cards";
@@ -21,19 +22,29 @@ import keys from "../keys";
 
 const useStyles = makeStyles(Theme);
 
-export default function MyCard(props) {
+export default function MyCard() {
   const [quotes, setQuotes] = useState([]);
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showLoader, setShowLoader] = useState(true);
+  const [error, setError] = useState({ status: "", msg: "" });
   const classes = useStyles();
 
   useEffect(() => {
     (async () => {
-      const response = await quote.get(`/api/${keys.API_KEY}/quote?num=30`);
-      setData(response.data);
-      setQuotes(response.data);
-      setShowLoader(false);
+      try {
+        const response = await quote.get(`/api/${keys.API_KEY}/quote?num=30`);
+        setData(response.data);
+        setQuotes(response.data);
+        setShowLoader(false);
+      } catch (err) {
+        console.log(err);
+        setShowLoader(false);
+        setError({
+          status: "error",
+          msg: "Servers are down. Please try again later",
+        });
+      }
     })();
   }, []);
 
@@ -87,9 +98,11 @@ export default function MyCard(props) {
                 </Link>
               </Grid>
               <Grid item>
-                <Button variant="outlined" color="primary">
-                  API Documentation
-                </Button>
+                <Link to="/api-docs" style={{ textDecoration: "none" }}>
+                  <Button variant="outlined" color="primary">
+                    API Documentation
+                  </Button>
+                </Link>
               </Grid>
             </Grid>
           </div>
@@ -107,6 +120,15 @@ export default function MyCard(props) {
                   color="secondary"
                   style={{ marginLeft: "calc(50% - 10px)" }}
                 />
+              );
+            } else if (error.status === "error") {
+              return (
+                <Alert severity={error.status} variant="outlined">
+                  <AlertTitle>
+                    {error.status === "success" ? "Success" : "Error"}
+                  </AlertTitle>
+                  {error.msg}
+                </Alert>
               );
             } else {
               return <Cards quotes={quotes} />;

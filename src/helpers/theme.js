@@ -5,6 +5,7 @@ const Theme = (theme) => ({
   },
   title: {
     flexGrow: 1,
+    cursor: "pointer",
   },
   icon: {
     marginRight: theme.spacing(2),
