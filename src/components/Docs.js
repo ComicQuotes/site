@@ -5,89 +5,109 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import { Alert, AlertTitle } from "@material-ui/lab";
 
 import { makeStyles } from "@material-ui/core/styles";
 
 import Nav from "../partials/Nav";
 import Footer from "../partials/Footer";
 import muiTheme from "../helpers/muiTheme";
+import APIBar from "./APIBar";
+import Badge from "./Badge";
 
 import Theme from "../helpers/theme";
-import quote from "../api/quotes";
 
 const useStyles = makeStyles(Theme);
 
 const theme = createMuiTheme(muiTheme);
 
 const Register = () => {
-  //   const handleRequest = async (e) => {
-  //     e.preventDefault();
-  //     const { data } = await quote.post(`/register`, { email });
-  //     setAlertMsg({ status: data.status, msg: data.msg });
-  //     console.log(data);
-  //     setAlert(true);
-  //   };
-
   const classes = useStyles();
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
         <CssBaseline>
           <Nav />
-          <Container style={{ maxWidth: "85vw", minHeight: "100vh" }}>
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="textPrimary"
-              gutterBottom
-              style={{ marginTop: "40px" }}
-            >
-              Comic Quotes
-            </Typography>
+          <Container
+            style={{
+              maxWidth: "85vw",
+              minHeight: "100vh",
+              display: "flex",
+              flexDirection: "column",
+              //   alignItems: "center",
+              marginBottom: "500px",
+            }}
+          >
+            <div>
+              <Typography
+                component="h1"
+                variant="h2"
+                align="center"
+                color="textPrimary"
+                gutterBottom
+                style={{ marginTop: "40px" }}
+              >
+                Comic Quotes
+              </Typography>
+            </div>
+            <APIBar
+              title="Base URL"
+              url="https://comicquotes.herokuapp.com/<apiKey>"
+              color="red"
+            />
             <Typography
               variant="h5"
               color="textPrimary"
-              align="center"
               paragraph
               style={{ marginTop: "20px" }}
             >
-              ComicQuotes API is a query based API.
+              API Endpoints
             </Typography>
+            <APIBar
+              title="GET"
+              url="/quote/"
+              desc="Delivers a random quote"
+              color="green"
+            />
+            <APIBar
+              title="GET"
+              url="/quote/:id"
+              desc="Delivers quote of quoteID=id"
+              color="green"
+            />
             <Typography
               variant="h5"
               color="textPrimary"
-              align="center"
               paragraph
-              style={{
-                marginTop: "20px",
-                padding: "10px 10px",
-                border: "1px solid #49cc90",
-                borderRadius: "5px",
-                maxWidth: "max-content",
-                backgroundColor: "#e8f6f0",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
+              style={{ marginTop: "20px" }}
             >
-              <div
-                style={{
-                  marginRight: "10px",
-                  padding: "5px 10px",
-                  border: "1px solid #49cc90",
-                  borderRadius: "5px",
-                  maxWidth: "max-content",
-                  backgroundColor: "#49cc90",
-                  color: "white",
-                  fontWeight: "600",
-                }}
-              >
-                Base URL
-              </div>
-              <div>https://comicquotes.herokuapp.com/&lt;apikey&gt;</div>
+              Query Parameters
             </Typography>
+            <APIBar
+              title="QUERY"
+              url="comic"
+              desc="Searches for quotes of the comic requested"
+              color="blue"
+            />
+            <APIBar
+              title="QUERY"
+              url="num"
+              desc="Request for only a number of quotes"
+              color="blue"
+            />
+            <Typography
+              variant="h5"
+              color="textPrimary"
+              paragraph
+              style={{ marginTop: "20px" }}
+            >
+              Available Comics
+            </Typography>
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <Badge name="ironman" />
+              <Badge name="spiderman" />
+              <Badge name="batman" />
+              <Badge name="greenarrow" />
+            </div>
           </Container>
           <Footer />
         </CssBaseline>

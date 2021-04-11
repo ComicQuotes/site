@@ -21,8 +21,18 @@ const Nav = () => {
               Comic Quotes
             </Link>
           </Typography>
-          <Button color="inherit">API</Button>
-          <Button color="inherit">Features</Button>
+          <Link
+            to="/api-docs"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <Button color="inherit">API</Button>
+          </Link>
+          <Link
+            to="/register"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <Button color="inherit">GET API KEY</Button>
+          </Link>
           <Button
             color="inherit"
             onClick={(e) => {
@@ -32,7 +42,15 @@ const Nav = () => {
           >
             Donate
           </Button>
-          <Button color="inherit">Github</Button>
+          <Button
+            color="inherit"
+            onClick={(e) => {
+              e.preventDefault();
+              window.open("http://github.com/ComicQuotes", "_blank");
+            }}
+          >
+            Github
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
